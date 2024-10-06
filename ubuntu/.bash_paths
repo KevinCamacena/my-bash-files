@@ -1,0 +1,67 @@
+################################################################################
+################################################################################
+######## Programming Languages Paths
+################################################################################
+################################################################################
+
+# Apache Maven
+export PATH=$PATH:"/usr/local/lib/apache-maven-3.9.9/bin"
+
+# Clang
+# export PATH=$PATH:"/home/kev/Programs/llvm-project-llvmorg-19.1.0/build/bin"
+
+# Flutter
+export PATH=$PATH:"/usr/local/lib/flutter/bin"
+
+# Gradle
+export PATH=$PATH:"/usr/local/lib/gradle-8.8/bin"
+
+# Go language
+export PATH=$PATH:"/usr/local/lib/go/bin"
+
+# Java 
+export PATH=$PATH:"/usr/local/lib/graalvm-jdk-17.0.12+8.1/bin"
+
+# Lapce
+export PATH=$PATH:"/opt/Lapce"
+
+# Nim
+export PATH=$PATH:"/usr/local/lib/nim-2.0.8/bin"
+
+# Rust
+. "$HOME/.cargo/env"
+
+# nvm
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# pnpm
+# export PNPM_HOME="~/.local/share/pnpm"
+# case ":$PATH:" in
+# *":$PNPM_HOME:"*) ;;
+# *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
+
+# Scala language
+export PATH=$PATH:"~/.local/share/coursier/bin"
+
+# Zig language
+export PATH=$PATH:"/usr/local/lib/zig-linux-x86_64-0.13.0"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/kev/anaconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+  eval "$__conda_setup"
+else
+  if [ -f "/home/kev/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "/home/kev/anaconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/home/kev/anaconda3/bin:$PATH"
+  fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
