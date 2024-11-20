@@ -30,7 +30,12 @@ eshared() {
 }
 
 ekitty() {
-  vim ~/.config/kitty/kitty.conf
+  nvim ~/.config/kitty/kitty.conf
+}
+
+ek8s() {
+  nvim ~/.bash_k8s
+  source ~/.bash_k8s
 }
 
 search() {
