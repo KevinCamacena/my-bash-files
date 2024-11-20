@@ -1,34 +1,90 @@
-################################################################################################
-################################################################################################
-################################################################################################
-##### Functions
-################################################################################################
-################################################################################################
-################################################################################################
-#!/bin/usr/env bash
+#####################################################################
+#####################################################################
+### Functions
+#####################################################################
+#####################################################################
+#!/usr/bin/bash
 ebash() {
   nvim ~/.bashrc
   source ~/.bashrc
 }
 
-epaths() {
-  nvim /home/kev/.bash_paths
-  source /home/kev/.bash_paths
+ealias() {
+  nvim ~/.bash_aliases
+  source ~/.bash_aliases
 }
 
 efuncs() {
-  nvim /home/kev/.bash_functions
-  source /home/kev/.bash_functions
+  nvim ~/.bash_functions
+  source ~/.bash_functions
 }
 
-ealias() {
-  nvim /home/kev/.bash_aliases
-  source /home/kev/.bash_aliases
+epaths() {
+  nvim ~/.bash_paths
+  source ~/.bash_paths
+}
+
+eshared() {
+  nvim /shared/.bash_shared
+  source /shared/.bash_shared
+}
+
+ekitty() {
+  nvim ~/.config/kitty/kitty.conf
+}
+
+ek8s() {
+  nvim ~/.bash_k8s
+  source ~/.bash_k8s
+}
+
+search() {
+  if [[ -d ~/.sinf ]]; then
+    rm ~/.sinf
+  fi
+  touch ~/.sinf
+  echo "################ APT/NALA  ####################" >> ~/.sinf
+  nala search $1 | grep $1 >> ~/.sinf
+  echo "################ SNAP ####################" >> ~/.sinf
+  snap find $1 | grep $1 >>~ /.sinf
+  echo "############## FLATPAK ####################" >> ~/.sinf
+  flatpak search $1 | grep $1 >> ~/.sinf
+  vim ~/.sinf
+}
+
+update() {
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt autoremove
+  sudo snap refresh
+  flatpak update
+}
+
+fpsearch() {
+  flatpak search $1 | grep $1
+}
+
+snapser() {
+  snap find $1 | grep $1
+}
+
+function workspace() {
+  cd ~/workspace/"$1"
+}
+
+function Download() {
+    cd ~/Downloads/"$1"
+}
+
+function GitHub() {
+  cd ~/GitHub/"$1"
 }
 
 addFont() {
-  sudo mkdir -p /usr/local/share/fonts/"$1"
-  sudo unzip $2 -d /usr/local/share/fonts/"$1"
+  filename="$1" # Get the filename argument
+  font="${filename%.zip}"
+  sudo mkdir -p /usr/local/share/fonts/"$font"
+  sudo unzip $filename -d /usr/local/share/fonts/"$font"
   sudo fc-cache -v
 }
 
@@ -36,21 +92,8 @@ removeFont() {
   sudo rm -r /usr/local/share/fonts/"$1"
 }
 
-newCont() {
-  hugo new content content/"$1"
-}
-
-pdf2png() {
-  echo "Starting convertion"
-
-  for file in *.pdf; do
-    convert -density 300 $file -quality 75 $file.png
-  done
-  echo "Done"
-}
-
-workspace() {
-  cd /home/kev/workspace/"$1"
+minecraft() {
+  java -jar /shared/.config/tlauncher/TLauncher.jar
 }
 
 #######################################################
@@ -223,6 +266,13 @@ distribution() {
   echo $dtype
 }
 
+DISTRIBUTION=$(distribution)
+if [ "$DISTRIBUTION" = "redhat" ] || [ "$DISTRIBUTION" = "arch" ]; then
+  alias cat='bat'
+else
+  alias cat='batcat'
+fi
+
 # Show the current version of the operating system
 ver() {
   local dtype
@@ -259,6 +309,41 @@ ver() {
       echo "Error: Unknown distribution"
       exit 1
     fi
+    ;;
+  esac
+}
+
+# Automatically install the needed support files for this .bashrc file
+install_bashrc_support() {
+  local dtype
+  dtype=$(distribution)
+
+  case $dtype in
+  "redhat")
+    sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+    ;;
+  "suse")
+    sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+    ;;
+  "debian")
+    sudo apt-get install multitail tree zoxide trash-cli fzf bash-completion
+    # Fetch the latest fastfetch release URL for linux-amd64 deb file
+    FASTFETCH_URL=$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | grep "browser_download_url.*linux-amd64.deb" | cut -d '"' -f 4)
+
+    # Download the latest fastfetch deb file
+    curl -sL $FASTFETCH_URL -o /tmp/fastfetch_latest_amd64.deb
+
+    # Install the downloaded deb file using apt-get
+    sudo apt-get install /tmp/fastfetch_latest_amd64.deb
+    ;;
+  "arch")
+    sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch
+    ;;
+  "slackware")
+    echo "No install support for Slackware"
+    ;;
+  *)
+    echo "Unknown distribution"
     ;;
   esac
 }
@@ -355,27 +440,10 @@ gcom() {
   git add .
   git commit -m "$1"
 }
+
 lazyg() {
   git add .
   git commit -m "$1"
   git push
 }
 
-function hb {
-  if [ $# -eq 0 ]; then
-    echo "No file path specified."
-    return
-  elif [ ! -f "$1" ]; then
-    echo "File path does not exist."
-    return
-  fi
-
-  uri="http://bin.christitus.com/documents"
-  response=$(curl -s -X POST -d @"$1" "$uri")
-  if [ $? -eq 0 ]; then
-    hasteKey=$(echo $response | jq -r '.key')
-    echo "http://bin.christitus.com/$hasteKey"
-  else
-    echo "Failed to upload the document."
-  fi
-}

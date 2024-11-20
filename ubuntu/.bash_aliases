@@ -3,7 +3,7 @@
 ### Aliases
 #################################################################################
 #################################################################################
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # apt
 alias ainstall="sudo apt install -y"
 alias aremove="sudo apt purge -y"

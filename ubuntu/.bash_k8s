@@ -1,8 +1,0 @@
-# Kubernetes
-# alias kubectl="minikube kubectl --"
-alias mini_ing="minikube start --addons ingress"
-alias adding='minikube addons enable ingress'
-
-ministc() {
-  minikube start --cpus=$1
-}
