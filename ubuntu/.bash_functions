@@ -24,6 +24,11 @@ epaths() {
   source ~/.bash_paths
 }
 
+eshared() {
+  nvim /shared/.bash_shared
+  source /shared/.bash_shared
+}
+
 ekitty() {
   vim ~/.config/kitty/kitty.conf
 }
@@ -33,12 +38,12 @@ search() {
     rm ~/.sinf
   fi
   touch ~/.sinf
-  echo "################ APT/NALA  ####################" >>~/.sinf
-  nala search $1 | grep $1 >>.sinf
-  echo "################ SNAP ####################" >>~/.sinf
-  snap find $1 | grep $1 >>~/.sinf
-  echo "############## FLATPAK ####################" >>~/.sinf
-  flatpak search $1 | grep $1 >>~/.sinf
+  echo "################ APT/NALA  ####################" >> ~/.sinf
+  nala search $1 | grep $1 >> ~/.sinf
+  echo "################ SNAP ####################" >> ~/.sinf
+  snap find $1 | grep $1 >>~ /.sinf
+  echo "############## FLATPAK ####################" >> ~/.sinf
+  flatpak search $1 | grep $1 >> ~/.sinf
   vim ~/.sinf
 }
 
@@ -83,7 +88,11 @@ removeFont() {
 }
 
 minecraft() {
-  java -jar ~/.config/tlauncher/TLauncher.jar
+  java -jar /shared/.config/tlauncher/TLauncher.jar
+}
+
+ministc() {
+  minikube start --cpus=$1
 }
 
 #######################################################
@@ -436,21 +445,3 @@ lazyg() {
   git push
 }
 
-function hb {
-  if [ $# -eq 0 ]; then
-    echo "No file path specified."
-    return
-  elif [ ! -f "$1" ]; then
-    echo "File path does not exist."
-    return
-  fi
-
-  uri="http://bin.christitus.com/documents"
-  response=$(curl -s -X POST -d @"$1" "$uri")
-  if [ $? -eq 0 ]; then
-    hasteKey=$(echo $response | jq -r '.key')
-    echo "http://bin.christitus.com/$hasteKey"
-  else
-    echo "Failed to upload the document."
-  fi
-}
