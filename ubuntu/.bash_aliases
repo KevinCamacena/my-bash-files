@@ -18,23 +18,20 @@ alias remove="sudo nala remove -y"
 # snap
 alias sinstallc="sudo snap install --classic"
 alias sinstall="sudo snap install"
-alias dev="cd /home/kevcam/workspace"
 
 #################################################################################
 ### Flatpak apps for run in terminal
 #################################################################################
-# alias gedit="flatpak run org.gnome.gedit"
-
-#################################################################################
-### Kitty
-#################################################################################
-# export TERMINFO="/usr/share/terminfo"
 
 #################################################################################
 ### Mounting devices
 #################################################################################
-alias mnt_kev="sudo mount /dev/sda1 /media/kevcam"
-alias mnt_bck="sudo mount /dev/sda2 /media/backup"
+
+
+#################################################################################
+### Kitty
+#################################################################################
+export TERMINFO="/usr/share/terminfo"
 
 #######################################################
 # GENERAL ALIAS'S
@@ -45,12 +42,6 @@ alias mnt_bck="sudo mount /dev/sda2 /media/backup"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Edit this .bashrc file
-alias ebrc='edit ~/.bashrc'
-
-# Show help for this .bashrc file
-alias hlp='less ~/.bashrc_help'
 
 # alias to show the date
 alias da='date "+%Y-%m-%d %A %T %Z"'
@@ -180,4 +171,6 @@ alias docker-clean=' \
 
 # Alias's to change the directory
 alias web='cd /var/www/html'
+alias dev="cd ~/ws"
+alias ws="cd ~/ws"
 
