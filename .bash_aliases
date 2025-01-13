@@ -3,13 +3,13 @@
 ### Aliases
 #################################################################################
 #################################################################################
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # apt
 alias ainstall="sudo apt install -y"
 alias aremove="sudo apt purge -y"
 alias asearch="sudo apt search"
 # flatpak
-alias fpinstall="flatpak install -y"
+alias fpinstall="sudo flatpak install -y"
 alias fpremove="flatpak uninstall -y"
 # nala
 alias install="sudo nala install -y"
@@ -18,20 +18,23 @@ alias remove="sudo nala remove -y"
 # snap
 alias sinstallc="sudo snap install --classic"
 alias sinstall="sudo snap install"
+alias sremove="sudo snap remove"
+
+alias dev=ws
 
 #################################################################################
 ### Flatpak apps for run in terminal
 #################################################################################
-
-#################################################################################
-### Mounting devices
-#################################################################################
-
+# alias gedit="flatpak run org.gnome.gedit"
 
 #################################################################################
 ### Kitty
 #################################################################################
-export TERMINFO="/usr/share/terminfo"
+# export TERMINFO="/usr/share/terminfo"
+
+#################################################################################
+### Mounting devices
+#################################################################################
 
 #######################################################
 # GENERAL ALIAS'S
@@ -55,10 +58,8 @@ alias ps='ps auxf'
 alias ping='ping -c 10'
 alias less='less -R'
 alias cls='clear'
-alias apt-get='sudo apt-get'
 alias multitail='multitail --no-repeat -c'
 alias freshclam='sudo freshclam'
-alias vi='nvim'
 alias svi='sudo vi'
 alias vis='nvim "+set si"'
 
@@ -108,6 +109,7 @@ alias h="history | grep "
 
 # Search running processes
 alias p="ps aux | grep "
+
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
 # Search files in the current folder
@@ -165,12 +167,10 @@ alias docker-clean=' \
 #######################################################
 # MACHINE SPECIFIC ALIAS'S
 #######################################################
-
-# Alias's for SSH
-# alias SERVERNAME='ssh YOURWEBSITE.com -l USERNAME -p PORTNUMBERHERE'
-
 # Alias's to change the directory
 alias web='cd /var/www/html'
-alias dev="cd ~/ws"
-alias ws="cd ~/ws"
 
+# Python
+alias python=python3
+alias py=python3
+alias uvact="source .venv/bin/activate"

@@ -3,7 +3,7 @@
 ### Functions
 #####################################################################
 #####################################################################
-#!/usr/bin/bash
+#!/bin/bash
 ebash() {
   nvim ~/.bashrc
   source ~/.bashrc
@@ -30,23 +30,18 @@ eshared() {
 }
 
 ekitty() {
-  nvim ~/.config/kitty/kitty.conf
-}
-
-ek8s() {
-  nvim ~/.bash_k8s
-  source ~/.bash_k8s
+  vim ~/.config/kitty/kitty.conf
 }
 
 search() {
-  if [[ -d ~/.sinf ]]; then
+  if [[ -e ~/.sinf ]]; then
     rm ~/.sinf
   fi
   touch ~/.sinf
   echo "################ APT/NALA  ####################" >> ~/.sinf
   nala search $1 | grep $1 >> ~/.sinf
   echo "################ SNAP ####################" >> ~/.sinf
-  snap find $1 | grep $1 >>~ /.sinf
+  snap find $1 | grep $1 >> ~/.sinf
   echo "############## FLATPAK ####################" >> ~/.sinf
   flatpak search $1 | grep $1 >> ~/.sinf
   vim ~/.sinf
@@ -55,9 +50,9 @@ search() {
 update() {
   sudo apt update
   sudo apt upgrade -y
-  sudo apt autoremove
+  sudo apt autoremove -y
   sudo snap refresh
-  flatpak update
+  flatpak update -y
 }
 
 fpsearch() {
@@ -76,8 +71,16 @@ function Download() {
     cd ~/Downloads/"$1"
 }
 
-function GitHub() {
-  cd ~/GitHub/"$1"
+function ghd() {
+  cd ~/github/"$1"
+}
+
+function ws() {
+  cd ~/workspace/"$1"
+}
+
+function chk_docker() {
+  docker run --rm -i hadolint/hadolint < Dockerfile
 }
 
 addFont() {
@@ -94,6 +97,14 @@ removeFont() {
 
 minecraft() {
   java -jar /shared/.config/tlauncher/TLauncher.jar
+}
+
+ministc() {
+  minikube start --cpus=$1
+}
+
+upulumi() {
+  curl -sSL https://get.pulumi.com | sh
 }
 
 #######################################################
@@ -434,7 +445,6 @@ trim() {
   var="${var%"${var##*[![:space:]]}"}" # remove trailing whitespace characters
   echo -n "$var"
 }
-# GitHub Titus Additions
 
 gcom() {
   git add .
@@ -446,4 +456,5 @@ lazyg() {
   git commit -m "$1"
   git push
 }
+
 
