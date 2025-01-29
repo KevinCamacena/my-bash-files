@@ -17,4 +17,3 @@ cp .bashrc ~/.bashrc
 
 # Copying starship.toml to ~/.config
 cp starship.toml ~/.config/
-
