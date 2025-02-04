@@ -11,3 +11,42 @@ alias adding='minikube addons enable ingress'
 ministc() {
   minikube start --cpus=$1
 }
+
+
+# # Basic usage:
+# minipod
+
+# # With CPU and Memory:
+# minipod 4 8g
+
+# # With CPU, Memory, and Addons:
+# minipod 2 4g metrics-server,ingress
+
+# # With CPU, Memory, Addons, and other minikube flags
+# minipod 2 4g metrics-server,ingress --kubernetes-version v1.28.0 --profile myprofile
+
+# #Another example
+# minipod 2 4g metrics-server --insecure-registry="10.0.0.0/24"
+
+minipod() {
+  cpu=$1
+  memory=$2
+  addons=$3
+  local extra_args=""
+
+  if [[ -n "$cpu" ]]; then 
+    extra_args+=" --cpu=$cpu"
+  fi
+
+  if [[ -n "$memory" ]]; then 
+    extra_args+=" --memory=$memory"
+  fi
+
+  if [[ -n "$addons" ]]; then 
+    for addon in $(echo "$addons" | tr "," " ""); do 
+      extra_args+=" --addons=$addon"
+    done
+  fi
+
+  minikube start --driver=podman --contianer-runtime=cri-o $extra_args "$@"
+}
