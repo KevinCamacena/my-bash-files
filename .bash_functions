@@ -3,7 +3,7 @@
 ### Functions
 #####################################################################
 #####################################################################
-#!/bin/bash
+#!/usr/bin/env bash
 ebash() {
   nvim ~/.bashrc
   source ~/.bashrc
@@ -97,10 +97,6 @@ removeFont() {
 
 minecraft() {
   java -jar /shared/.config/tlauncher/TLauncher.jar
-}
-
-ministc() {
-  minikube start --cpus=$1
 }
 
 upulumi() {
@@ -456,5 +452,3 @@ lazyg() {
   git commit -m "$1"
   git push
 }
-
-
