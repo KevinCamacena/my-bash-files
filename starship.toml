@@ -1,5 +1,6 @@
 format = """
 [](#3B4252)\
+$python\
 $username\
 [](bg:#434C5E fg:#3B4252)\
 $directory\
@@ -16,7 +17,6 @@ $java\
 $julia\
 $nodejs\
 $nim\
-$python\
 $rust\
 [](fg:#86BBD8 bg:#06969A)\
 $docker_context\
@@ -43,7 +43,6 @@ truncation_symbol = "…/"
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
-[directory.substitutions]
 [directory.substitutions]
 "~" = ""
 #"~" = ""
