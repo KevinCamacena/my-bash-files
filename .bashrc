@@ -93,6 +93,10 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
+if [ -f ~/.bash_paths ]; then
+    . ~/.bash_paths
+fi
+
 if [ -f ~/.bash_k8s ]; then
     . ~/.bash_k8s
 fi

@@ -43,7 +43,7 @@ minipod() {
   fi
 
   if [[ -n "$addons" ]]; then 
-    for addon in $(echo "$addons" | tr "," " ""); do 
+    for addon in $(echo "$addons" | tr "," " "); do 
       extra_args+=" --addons=$addon"
     done
   fi
