@@ -1,0 +1,42 @@
+[general]
+# import = []
+working_directory = "C:\\Users\\kevin_camacena"
+live_config_reload = true
+
+[window]
+opacity = 0.8
+padding.x = 10
+padding.y = 10
+dynamic_padding = true
+decorations = "Full"
+decorations_theme_variant = "Dark"
+startup_mode = "Maximized"
+
+[scrolling]
+history = 512
+multiplier = 8 
+
+[font]
+normal = { family="JetBrainsMono NF", style="Regular" }
+bold.family = "JetBrainsMono NF ExtraBold"
+italic.family = "JetBrainsMono NF Thin"
+bold_italic.family = "JetBrainsMono NFM Light"
+size = 13.0
+offset = { x = 1, y = 1 }
+
+[selection]
+save_to_clipboard = true
+
+[terminal]
+shell = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+# shell = "C:\\Program Files (x86)\\PowerShell\\7\\pwsh.exe"
+
+[debug]
+# render_timer = true
+# persistent_loggin = true
+
+[keyboard]
+bindings = [
+  { key = "T", mods = "Control|Shift", action = "CreateNewWindow"},
+  { key = "D", mods = "Control|Shift", action = "SpawnNewInstance"},
+]
